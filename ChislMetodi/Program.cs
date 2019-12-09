@@ -43,11 +43,20 @@ namespace ChislMetodi
             //Console.WriteLine("VectorF:");
             //PrintVector(solver.VectorF);
             Console.WriteLine();
-            solver.SolveStep1();
-            solver.SolveStep2();
-            //solver.SolveStep3();
-            //solver.SolveStep4();
-            //solver.SolveStep5();
+            try
+            {
+                solver.SolveStep1();
+                solver.SolveStep2();
+                solver.SolveStep3();
+                solver.SolveStep4();
+                solver.SolveStep5();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);                
+            }
+
+ 
             matrix = solver.ToMatrix();
 
             for (int i = 0; i < n; i++)
@@ -59,13 +68,21 @@ namespace ChislMetodi
                 Console.WriteLine();
             }
 
-            //Console.WriteLine("VectorX:");
-            //PrintVector(solver.VectorX);
-
-            //Console.WriteLine("VectorF:");
-            //PrintVector(solver.VectorF);
-
+            Console.WriteLine("VectorX:");
+            PrintVector(solver.VectorX);
+            Console.WriteLine();
+            Console.WriteLine("VectorF:");
+            PrintVector(solver.VectorF);
+            Console.WriteLine();
             Console.WriteLine(solver.Pogr());
+            Console.WriteLine();
+            Console.WriteLine("VectorX1:");
+            PrintVector(solver.VectorX1);
+            Console.WriteLine();
+            Console.WriteLine("VectorF1:");
+            PrintVector(solver.VectorF1);
+            Console.WriteLine();
+            Console.WriteLine(solver.Pogr1());
 
             Console.ReadKey();
         }
@@ -74,7 +91,7 @@ namespace ChislMetodi
         {
             for (int i = 0; i < vector.Length; i++)
             {
-                Console.Write($"{Math.Round(vector[i],5)} ");
+                Console.Write($"{vector[i]} ");
             }
             Console.WriteLine();
         }
