@@ -12,60 +12,11 @@ namespace ChislMetodi
         {
             int n = 10;
             int k = 5;
-            TriDiagMatrixSolver solver = new TriDiagMatrixSolver(n,k);
+            var solver = new SimmHaleckySolver(10, 3);
             var matrix = solver.ToMatrix();
-            for (int i = 0; i < n; i++)
-            {
-                for (int j = 0; j < n; j++)
-                {
-                    Console.Write($"{matrix[i, j]} ");
-                }
-                Console.WriteLine();
-            }
-            //Console.WriteLine("DiagDown:");
-            //PrintVector(solver.DiagDown);
+            PrintMatrix(matrix);
+            PrintMatrix(solver.UpperPart);
 
-            //Console.WriteLine("DiagMain:");
-            //PrintVector(solver.DiagMain);
-
-            //Console.WriteLine("DiagUp:");
-            //PrintVector(solver.DiagUp);
-
-            //Console.WriteLine("Gorizontal1:");
-            //PrintVector(solver.Gorizontal1);
-
-            //Console.WriteLine("Gorizontal2:");
-            //PrintVector(solver.Gorizontal2);
-
-            //Console.WriteLine("VectorX:");
-            //PrintVector(solver.VectorX);
-
-            //Console.WriteLine("VectorF:");
-            //PrintVector(solver.VectorF);
-            Console.WriteLine();
-            solver.SolveStep1();
-            solver.SolveStep2();
-            //solver.SolveStep3();
-            //solver.SolveStep4();
-            //solver.SolveStep5();
-            matrix = solver.ToMatrix();
-
-            for (int i = 0; i < n; i++)
-            {
-                for (int j = 0; j < n; j++)
-                {
-                    Console.Write($"{Math.Round(matrix[i, j],3)} ");
-                }
-                Console.WriteLine();
-            }
-
-            //Console.WriteLine("VectorX:");
-            //PrintVector(solver.VectorX);
-
-            //Console.WriteLine("VectorF:");
-            //PrintVector(solver.VectorF);
-
-            Console.WriteLine(solver.Pogr());
 
             Console.ReadKey();
         }
@@ -77,6 +28,17 @@ namespace ChislMetodi
                 Console.Write($"{Math.Round(vector[i],5)} ");
             }
             Console.WriteLine();
+        }
+        static void PrintMatrix(double[,] matrix)
+        {
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    Console.Write($"{matrix[i, j]} ");
+                }
+                Console.WriteLine();
+            }
         }
     }
 }
