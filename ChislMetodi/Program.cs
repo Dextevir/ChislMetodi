@@ -10,13 +10,32 @@ namespace ChislMetodi
     {
         static void Main(string[] args)
         {
-            int n = 10;
-            int k = 5;
-            var solver = new SimmHaleckySolver(10, 3);
-            var matrix = solver.ToMatrix();
-            PrintMatrix(matrix);
-            PrintMatrix(solver.UpperPart);
-
+            //int n = 10;
+            //int k = 5;
+            //var solver = new SimmHaleckySolver(8, 4);
+            //var matrix = solver.ToMatrix();
+            //PrintMatrix(matrix);
+            //Console.WriteLine();
+            ////PrintMatrix(solver.UpperPart);
+            //solver.Solve();
+            //PrintMatrix(solver.MatrixB);
+            //Console.WriteLine();
+            //PrintMatrix(solver.MatrixC);
+            //Console.WriteLine();
+            //solver.SolveStep2();
+            //PrintVector(solver.VectorX);
+            //Console.WriteLine();
+            //PrintVector(solver.VectorY);
+            //Console.WriteLine();
+            //PrintVector(solver.VectorXOrig);
+            try
+            {
+                Console.WriteLine($"sredpogr = {SredPogr(10, 140, 15)}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
             Console.ReadKey();
         }
@@ -40,5 +59,19 @@ namespace ChislMetodi
                 Console.WriteLine();
             }
         }
+        static double SredPogr(int count, int n, int l)
+        {
+            double[] vectorPogr = new double[count];
+            for(int i=0;i<count;i++)
+            {
+                var solver = new SimmHaleckySolver(n, l);
+                solver.Solve();
+                solver.SolveStep2();
+                vectorPogr[i] = solver.Pogr();
+            }
+            return vectorPogr.Average();            
+        }
+
+
     }
 }
