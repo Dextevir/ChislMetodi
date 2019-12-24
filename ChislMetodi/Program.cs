@@ -10,32 +10,33 @@ namespace ChislMetodi
     {
         static void Main(string[] args)
         {
-            //int n = 10;
-            //int k = 5;
-            //var solver = new SimmHaleckySolver(8, 4);
-            //var matrix = solver.ToMatrix();
-            //PrintMatrix(matrix);
+            //var solver = new EigenValuesSolver(10, 50000, Math.Pow(10, -5), Math.Pow(10, -5));
+            //PrintMatrix(solver.Matrix);
             //Console.WriteLine();
-            ////PrintMatrix(solver.UpperPart);
+            //PrintMatrix(solver.EigenVectors);
+            //Console.WriteLine();
+            //PrintVector(solver.EigenValues);
+            //Console.WriteLine();
+            //Console.WriteLine($"Lambda = {solver.OriginalValue}");
+            //Console.WriteLine($"Lambda0 = {solver.FirstValue}");
+            //Console.WriteLine();
+            //PrintVector(solver.OriginalVector);
+            //Console.WriteLine();
+            //PrintVector(solver.FirstVector);
+
             //solver.Solve();
-            //PrintMatrix(solver.MatrixB);
+
             //Console.WriteLine();
-            //PrintMatrix(solver.MatrixC);
+            //PrintVector(solver.FindedVector);
             //Console.WriteLine();
-            //solver.SolveStep2();
-            //PrintVector(solver.VectorX);
+            //Console.WriteLine($"findLambda = {solver.FindedValue}");
+
+            //Console.WriteLine($"itCount = {solver.IterationsCount}");
             //Console.WriteLine();
-            //PrintVector(solver.VectorY);
-            //Console.WriteLine();
-            //PrintVector(solver.VectorXOrig);
-            try
-            {
-                Console.WriteLine($"sredpogr = {SredPogr(10, 140, 15)}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            //PrintVector(solver.Component());
+
+            Test(50, 5000, Math.Pow(10, -8), 100);
+
 
             Console.ReadKey();
         }
@@ -70,6 +71,34 @@ namespace ChislMetodi
                 vectorPogr[i] = solver.Pogr();
             }
             return vectorPogr.Average();            
+        }
+
+        static void Test(int n, int maxIter, double epsilon, int countTests)
+        {
+            int[] iterationsCountVector = new int[countTests];
+            double[] valuePogrVector = new double[countTests];
+            double[] vectorPogrVector = new double[countTests];
+            double[] tochnPogrVector = new double[countTests];
+            for (int i=0;i<countTests; i++)
+            {
+                var solver = new EigenValuesSolver(n, maxIter, epsilon, epsilon);
+                solver.Solve();
+                if(solver.IterationsCount == maxIter)
+                {
+                    i--;
+                }else
+                {
+                    iterationsCountVector[i] = solver.IterationsCount;
+                    valuePogrVector[i] = solver.TochnostValue;
+                    vectorPogrVector[i] = solver.TochnostVector;
+                    tochnPogrVector[i] = solver.Pogresh;
+                }
+            }
+            Console.WriteLine($"Average iterations count = {iterationsCountVector.Average()}");
+            Console.WriteLine($"Average value accuracy  = {valuePogrVector.Average()}");
+            Console.WriteLine($"Average vector accuracy  = {vectorPogrVector.Average()}");
+            Console.WriteLine($"Average measure of accuracy  = {tochnPogrVector.Average()}");
+
         }
 
 

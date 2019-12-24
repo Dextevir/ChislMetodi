@@ -175,15 +175,15 @@ namespace ChislMetodi
                     MatrixB[j, i] -= sum;
                 }
             }
-            MatrixC = new double[N, N];
-            for (int i = 0; i < N; i++)
-            {
-                for (int j = i; j < N; j++)
-                {
-                    if (Math.Round(MatrixB[i, i], 15) == 0) throw new Exception("Алгоритм не применим");
-                    MatrixC[i, j] = MatrixB[j, i] / MatrixB[i, i];
-                }
-            }
+            //MatrixC = new double[N, N];
+            //for (int i = 0; i < N; i++)
+            //{
+            //    for (int j = i; j < N; j++)
+            //    {
+            //        if (Math.Round(MatrixB[i, i], 15) == 0) throw new Exception("Алгоритм не применим");
+            //        MatrixC[i, j] = MatrixB[j, i] / MatrixB[i, i];
+            //    }
+            //}
         }
 
 
@@ -194,7 +194,7 @@ namespace ChislMetodi
                 for (int i = j; i <= KN(j, L, N); i++)
                 {
                     double S = UpperPart[i, j - i + L - 1];
-                    for (int k = 0; k <= j - 1; k++)
+                    for (int k = K0(i,L); k <= j - 1; k++)
                     {
                         int j1 = k - i + L - 1;
                         int j2 = j - k + L - 1;
@@ -205,7 +205,7 @@ namespace ChislMetodi
                     }
                     MatrixB[i, j - i + L - 1] = S;
                     S = UpperPart[j, i - j + L - 1];
-                    for (int k = 0; k <= j - 1; k++)
+                    for (int k = K0(i, L); k <= j - 1; k++)
                     {
                         int j1 = k - j + L - 1;
                         int j2 = i - k + L - 1;
